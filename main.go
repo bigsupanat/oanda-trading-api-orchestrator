@@ -6,21 +6,21 @@ import (
 	"os/signal"
 
 	"github.com/bigsupanat/oanda-trading-api-orchestrator/conf"
-	"github.com/bigsupanat/oanda-trading-api-orchestrator/goanda"
+	"github.com/bigsupanat/oanda-trading-api-orchestrator/oandaclient"
 	"github.com/bigsupanat/oanda-trading-api-orchestrator/server"
 	"github.com/bigsupanat/oanda-trading-api-orchestrator/service"
 )
 
 func main() {
 
-	oanda, err := goanda.NewConnection(conf.AccountID, conf.AccessToken, conf.Environment)
+	client, err := oandaclient.NewConnection(conf.AccountID, conf.AccessToken, conf.Environment)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
 	svc := service.Service{
-		OandaGetFunc:  oanda.Get,
-		OandaPostFunc: oanda.Post,
+		OandaGetFunc:  client.Get,
+		OandaPostFunc: client.Post,
 		//OandaRequestFunc: oanda.Request,
 		// OandaSendFunc:              oanda.Send,
 		// OandaUpdateFunc:            oanda.Update,
