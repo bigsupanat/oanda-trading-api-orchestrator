@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/bigsupanat/oanda-trading-api-orchestrator/conf"
 	"github.com/bigsupanat/oanda-trading-api-orchestrator/service"
 	"github.com/go-chi/chi"
 	"github.com/go-chi/chi/middleware"
@@ -42,8 +43,9 @@ func (s *server) startServer() {
 	s.router.Use(middleware.Recoverer)
 
 	s.router.Get("/get_account_summary", getAccountSummaryFn(s.svc))
+
 	s.srv = &http.Server{
-		Addr:    ":8080",
+		Addr:    conf.ServicePort,
 		Handler: s.router,
 	}
 	if err := s.srv.ListenAndServe(); err != nil {

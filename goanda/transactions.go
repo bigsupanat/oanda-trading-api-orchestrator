@@ -1,7 +1,6 @@
 package goanda
 
 import (
-	"net/url"
 	"time"
 )
 
@@ -66,34 +65,34 @@ type Transactions struct {
 
 // https://golang.org/pkg/time/#Time.AddDate
 // https://play.golang.org/p/Dw7D4JJ7EC
-func (c *OandaConnection) GetTransactions(from time.Time, to time.Time) TransactionPages {
-	toTime := to.Format(time.RFC3339)
-	fromTime := from.Format(time.RFC3339)
+// func (c *OandaConnection) GetTransactions(from time.Time, to time.Time) TransactionPages {
+// 	toTime := to.Format(time.RFC3339)
+// 	fromTime := from.Format(time.RFC3339)
 
-	endpoint := "/accounts/" + c.accountID + "/transactions?to=" + url.QueryEscape(toTime) + "&from=" + url.QueryEscape(fromTime)
+// 	endpoint := "/accounts/" + c.accountID + "/transactions?to=" + url.QueryEscape(toTime) + "&from=" + url.QueryEscape(fromTime)
 
-	response := c.Request(endpoint)
-	data := TransactionPages{}
-	unmarshalJson(response, &data)
-	return data
-}
+// 	response := c.Request(endpoint)
+// 	data := TransactionPages{}
+// 	unmarshalJson(response, &data)
+// 	return data
+// }
 
-func (c *OandaConnection) GetTransaction(ticket string) Transaction {
+// func (c *OandaConnection) GetTransaction(ticket string) Transaction {
 
-	endpoint := "/accounts/" + c.accountID + "/transactions/" + ticket
+// 	endpoint := "/accounts/" + c.accountID + "/transactions/" + ticket
 
-	response := c.Request(endpoint)
-	data := Transaction{}
-	unmarshalJson(response, &data)
-	return data
-}
+// 	response := c.Request(endpoint)
+// 	data := Transaction{}
+// 	unmarshalJson(response, &data)
+// 	return data
+// }
 
-func (c *OandaConnection) GetTransactionsSinceId(id string) Transactions {
+// func (c *OandaConnection) GetTransactionsSinceId(id string) Transactions {
 
-	endpoint := "/accounts/" + c.accountID + "/transactions/sinceid?id=" + id
+// 	endpoint := "/accounts/" + c.accountID + "/transactions/sinceid?id=" + id
 
-	response := c.Request(endpoint)
-	data := Transactions{}
-	unmarshalJson(response, &data)
-	return data
-}
+// 	response := c.Request(endpoint)
+// 	data := Transactions{}
+// 	unmarshalJson(response, &data)
+// 	return data
+// }

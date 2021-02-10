@@ -3,7 +3,6 @@ package goanda
 // Supporting OANDA docs - http://developer.oanda.com/rest-live-v20/trade-ep/
 
 import (
-	"encoding/json"
 	"time"
 )
 
@@ -112,40 +111,40 @@ type ModifiedTrade struct {
 	LastTransactionID     string   `json:"lastTransactionID"`
 }
 
-func (c *OandaConnection) GetTradesForInstrument(instrument string) ReceivedTrades {
-	endpoint := "/accounts/" + c.accountID + "/trades" + "?instrument=" + instrument
+// func (c *OandaConnection) GetTradesForInstrument(instrument string) ReceivedTrades {
+// 	endpoint := "/accounts/" + c.accountID + "/trades" + "?instrument=" + instrument
 
-	response := c.Request(endpoint)
-	data := ReceivedTrades{}
-	unmarshalJson(response, &data)
-	return data
-}
+// 	response := c.Request(endpoint)
+// 	data := ReceivedTrades{}
+// 	unmarshalJson(response, &data)
+// 	return data
+// }
 
-func (c *OandaConnection) GetOpenTrades() ReceivedTrades {
-	endpoint := "/accounts/" + c.accountID + "/openTrades"
+// func (c *OandaConnection) GetOpenTrades() ReceivedTrades {
+// 	endpoint := "/accounts/" + c.accountID + "/openTrades"
 
-	response := c.Request(endpoint)
-	data := ReceivedTrades{}
-	unmarshalJson(response, &data)
-	return data
-}
+// 	response := c.Request(endpoint)
+// 	data := ReceivedTrades{}
+// 	unmarshalJson(response, &data)
+// 	return data
+// }
 
-func (c *OandaConnection) GetTrade(ticket string) ReceivedTrade {
-	endpoint := "/accounts/" + c.accountID + "/trades" + "/" + ticket
+// func (c *OandaConnection) GetTrade(ticket string) ReceivedTrade {
+// 	endpoint := "/accounts/" + c.accountID + "/trades" + "/" + ticket
 
-	response := c.Request(endpoint)
-	data := ReceivedTrade{}
-	unmarshalJson(response, &data)
-	return data
-}
+// 	response := c.Request(endpoint)
+// 	data := ReceivedTrade{}
+// 	unmarshalJson(response, &data)
+// 	return data
+// }
 
-// Default is close the whole position using the string "ALL" in body.units
-func (c *OandaConnection) ReduceTradeSize(ticket string, body CloseTradePayload) ModifiedTrade {
-	endpoint := "/accounts/" + c.accountID + "/trades/" + ticket
-	jsonBody, err := json.Marshal(body)
-	checkErr(err)
-	response := c.Update(endpoint, jsonBody)
-	data := ModifiedTrade{}
-	unmarshalJson(response, &data)
-	return data
-}
+// // Default is close the whole position using the string "ALL" in body.units
+// func (c *OandaConnection) ReduceTradeSize(ticket string, body CloseTradePayload) ModifiedTrade {
+// 	endpoint := "/accounts/" + c.accountID + "/trades/" + ticket
+// 	jsonBody, err := json.Marshal(body)
+// 	checkErr(err)
+// 	response := c.Update(endpoint, jsonBody)
+// 	data := ModifiedTrade{}
+// 	unmarshalJson(response, &data)
+// 	return data
+// }

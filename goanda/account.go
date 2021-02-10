@@ -285,7 +285,7 @@ type OrderDetails struct {
 func (c *OandaConnection) GetAccounts() AccountProperties {
 	endpoint := "/accounts"
 
-	response := c.Request(endpoint)
+	response := c.Get(endpoint)
 	data := AccountProperties{}
 	unmarshalJson(response, &data)
 	return data
@@ -294,7 +294,7 @@ func (c *OandaConnection) GetAccounts() AccountProperties {
 func (c *OandaConnection) GetAccount(id string) AccountInfo {
 	endpoint := "/accounts/" + id
 
-	response := c.Request(endpoint)
+	response := c.Get(endpoint)
 	data := AccountInfo{}
 	unmarshalJson(response, &data)
 	return data
@@ -302,7 +302,7 @@ func (c *OandaConnection) GetAccount(id string) AccountInfo {
 
 func (c *OandaConnection) GetOrderDetails(instrument string, units string) OrderDetails {
 	endpoint := "/accounts/" + c.accountID + "/orderEntryData?disableFiltering=true&instrument=" + instrument + "&orderPositionFill=DEFAULT&units=" + units
-	orderDetails := c.Request(endpoint)
+	orderDetails := c.Get(endpoint)
 	data := OrderDetails{}
 	unmarshalJson(orderDetails, &data)
 
@@ -313,7 +313,7 @@ func (c *OandaConnection) GetAccountSummary(acctNum string) AccountSummary {
 	//endpoint := "/accounts/" + c.accountID + "/summary"
 	endpoint := "/accounts/" + acctNum + "/summary"
 
-	response := c.Request(endpoint)
+	response := c.Get(endpoint)
 	data := AccountSummary{}
 	unmarshalJson(response, &data)
 	return data
@@ -322,7 +322,7 @@ func (c *OandaConnection) GetAccountSummary(acctNum string) AccountSummary {
 func (c *OandaConnection) GetAccountInstruments(id string) AccountInstruments {
 	endpoint := "/accounts/" + id + "/instruments"
 
-	response := c.Request(endpoint)
+	response := c.Get(endpoint)
 	data := AccountInstruments{}
 	unmarshalJson(response, &data)
 	return data
@@ -331,7 +331,7 @@ func (c *OandaConnection) GetAccountInstruments(id string) AccountInstruments {
 func (c *OandaConnection) GetAccountChanges(id string, transactionId string) AccountChanges {
 	endpoint := "/accounts/" + id + "/changes?sinceTransactionID=" + transactionId
 
-	response := c.Request(endpoint)
+	response := c.Get(endpoint)
 	data := AccountChanges{}
 	unmarshalJson(response, &data)
 	return data

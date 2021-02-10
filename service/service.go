@@ -1,16 +1,21 @@
 package service
 
 type Service struct {
-	OandaRequestFunc           oandaRequestFunc
-	OandaSendFunc              oandaSendFunc
-	OandaUpdateFunc            oandaUpdateFunc
-	OandaGetOrderDetailsFunc   oandaGetOrderDetailsFunc
-	OandaGetAccountSummaryFunc oandaGetGetAccountSummaryFunc
-	OandaCreateOrderFunc       oandaCreateOrderfunc
+	OandaGetFunc  func(endpoint string) []byte
+	OandaPostFunc func(endpoint string, data []byte) []byte
+	// OandaSendFunc              oandaSendFunc
+	// OandaUpdateFunc            oandaUpdateFunc
+	// OandaGetOrderDetailsFunc   oandaGetOrderDetailsFunc
+	// OandaGetAccountSummaryFunc oandaGetGetAccountSummaryFunc
+	// OandaCreateOrderFunc       oandaCreateOrderfunc
 
-	GetAccountSummaryFunc getAccountSummaryFunc
+	// GetAccountSummaryFunc getAccountSummaryFunc
 }
 
-func (s Service) OandaRequest(endpoint string) []byte {
-	return s.OandaRequestFunc(endpoint)
+func (s Service) Request(endpoint string) []byte {
+	return s.OandaGetFunc(endpoint)
+}
+
+func (s Service) Send(endpoint string, data []byte) []byte {
+	return s.OandaPostFunc(endpoint, data)
 }

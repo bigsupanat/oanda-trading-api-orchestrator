@@ -103,47 +103,47 @@ type InstrumentPricing struct {
 	} `json:"prices"`
 }
 
-func (c *OandaConnection) GetCandles(instrument string, count string, granularity string) InstrumentHistory {
-	endpoint := "/instruments/" + instrument + "/candles?count=" + count + "&granularity=" + granularity
-	candles := c.Request(endpoint)
-	data := InstrumentHistory{}
-	unmarshalJson(candles, &data)
+// func (c *OandaConnection) GetCandles(instrument string, count string, granularity string) InstrumentHistory {
+// 	endpoint := "/instruments/" + instrument + "/candles?count=" + count + "&granularity=" + granularity
+// 	candles := c.Request(endpoint)
+// 	data := InstrumentHistory{}
+// 	unmarshalJson(candles, &data)
 
-	return data
-}
+// 	return data
+// }
 
-func (c *OandaConnection) GetBidAskCandles(instrument string, count string, granularity string) BidAskCandles {
-	endpoint := "/instruments/" + instrument + "/candles?count=" + count + "&granularity=" + granularity + "&price=BA"
-	candles := c.Request(endpoint)
-	data := BidAskCandles{}
-	unmarshalJson(candles, &data)
+// func (c *OandaConnection) GetBidAskCandles(instrument string, count string, granularity string) BidAskCandles {
+// 	endpoint := "/instruments/" + instrument + "/candles?count=" + count + "&granularity=" + granularity + "&price=BA"
+// 	candles := c.Request(endpoint)
+// 	data := BidAskCandles{}
+// 	unmarshalJson(candles, &data)
 
-	return data
-}
+// 	return data
+// }
 
-func (c *OandaConnection) OrderBook(instrument string) BrokerBook {
-	endpoint := "/instruments/" + instrument + "/orderBook"
-	orderbook := c.Request(endpoint)
-	data := BrokerBook{}
-	unmarshalJson(orderbook, &data)
+// func (c *OandaConnection) OrderBook(instrument string) BrokerBook {
+// 	endpoint := "/instruments/" + instrument + "/orderBook"
+// 	orderbook := c.Request(endpoint)
+// 	data := BrokerBook{}
+// 	unmarshalJson(orderbook, &data)
 
-	return data
-}
+// 	return data
+// }
 
-func (c *OandaConnection) PositionBook(instrument string) BrokerBook {
-	endpoint := "/instruments/" + instrument + "/positionBook"
-	orderbook := c.Request(endpoint)
-	data := BrokerBook{}
-	unmarshalJson(orderbook, &data)
+// func (c *OandaConnection) PositionBook(instrument string) BrokerBook {
+// 	endpoint := "/instruments/" + instrument + "/positionBook"
+// 	orderbook := c.Request(endpoint)
+// 	data := BrokerBook{}
+// 	unmarshalJson(orderbook, &data)
 
-	return data
-}
+// 	return data
+// }
 
-func (c *OandaConnection) GetInstrumentPrice(instrument string) InstrumentPricing {
-	endpoint := "/accounts/" + c.accountID + "/pricing?instruments=" + instrument
-	pricing := c.Request(endpoint)
-	data := InstrumentPricing{}
-	unmarshalJson(pricing, &data)
+// func (c *OandaConnection) GetInstrumentPrice(instrument string) InstrumentPricing {
+// 	endpoint := "/accounts/" + c.accountID + "/pricing?instruments=" + instrument
+// 	pricing := c.Request(endpoint)
+// 	data := InstrumentPricing{}
+// 	unmarshalJson(pricing, &data)
 
-	return data
-}
+// 	return data
+// }

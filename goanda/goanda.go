@@ -2,6 +2,7 @@ package goanda
 
 import (
 	"bytes"
+	"errors"
 	"net/http"
 	"time"
 )
@@ -14,12 +15,9 @@ type Headers struct {
 }
 
 type Connection interface {
-	Request(endpoint string) []byte
-	Send(endpoint string, data []byte) []byte
-	Update(endpoint string, data []byte) []byte
-	GetOrderDetails(instrument string, units string) OrderDetails
-	GetAccountSummary() AccountSummary
-	CreateOrder(body OrderPayload) OrderResponse
+	Get(endpoint string) []byte
+	Post(endpoint string, data []byte) []byte
+	// Update(endpoint string, data []byte) []byte
 }
 
 type OandaConnection struct {
@@ -34,13 +32,15 @@ type OandaConnection struct {
 
 const OANDA_AGENT string = "v20-golang/0.0.1"
 
-func NewConnection(accountID string, token string, live bool) *OandaConnection {
+func NewConnection(accountID string, token string, env string) (*OandaConnection, error) {
 	hostname := ""
 	// should we use the live API?
-	if live {
+	if env == "live" {
 		hostname = "https://api-fxtrade.oanda.com/v3"
-	} else {
+	} else if env == "practice" {
 		hostname = "https://api-fxpractice.oanda.com/v3"
+	} else {
+		return nil, errors.New("ENVIRONMENT in env.sh should be \"live\" or \"practice\"")
 	}
 
 	var buffer bytes.Buffer
@@ -66,11 +66,11 @@ func NewConnection(accountID string, token string, live bool) *OandaConnection {
 		accountID: accountID,
 	}
 
-	return connection
+	return connection, nil
 }
 
 // TODO: include params as a second option
-func (c *OandaConnection) Request(endpoint string) []byte {
+func (c *OandaConnection) Get(endpoint string) []byte {
 	client := http.Client{
 		Timeout: time.Second * 5, // 5 sec timeout
 	}
@@ -86,7 +86,7 @@ func (c *OandaConnection) Request(endpoint string) []byte {
 	return body
 }
 
-func (c *OandaConnection) Send(endpoint string, data []byte) []byte {
+func (c *OandaConnection) Post(endpoint string, data []byte) []byte {
 	client := http.Client{
 		Timeout: time.Second * 5, // 5 sec timeout
 	}
@@ -102,15 +102,15 @@ func (c *OandaConnection) Send(endpoint string, data []byte) []byte {
 	return body
 }
 
-func (c *OandaConnection) Update(endpoint string, data []byte) []byte {
-	client := http.Client{
-		Timeout: time.Second * 5,
-	}
+// func (c *OandaConnection) Update(endpoint string, data []byte) []byte {
+// 	client := http.Client{
+// 		Timeout: time.Second * 5,
+// 	}
 
-	url := createUrl(c.hostname, endpoint)
+// 	url := createUrl(c.hostname, endpoint)
 
-	req, err := http.NewRequest(http.MethodPut, url, bytes.NewBuffer(data))
-	checkErr(err)
-	body := makeRequest(c, endpoint, client, req)
-	return body
-}
+// 	req, err := http.NewRequest(http.MethodPut, url, bytes.NewBuffer(data))
+// 	checkErr(err)
+// 	body := makeRequest(c, endpoint, client, req)
+// 	return body
+// }

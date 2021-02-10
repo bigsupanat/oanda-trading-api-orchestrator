@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
+	"github.com/bigsupanat/oanda-trading-api-orchestrator/conf"
 	"github.com/bigsupanat/oanda-trading-api-orchestrator/handler"
 	"github.com/bigsupanat/oanda-trading-api-orchestrator/service"
 )
@@ -14,12 +15,15 @@ import (
 
 func getAccountSummaryFn(s service.Service) func(w http.ResponseWriter, r *http.Request) {
 	return func(w http.ResponseWriter, r *http.Request) {
-		req := "001-011-2498245-001"
-		res := handler.GetAccountSummary(s, req)
-		bytRet, _ := json.Marshal(res)
-
+		res, err := handler.GetAccountSummary(s, conf.AccountID)
+		if err != nil {
+			//
+		}
+		bytRet, err := json.Marshal(res)
+		if err != nil {
+			//
+		}
 		w.WriteHeader(http.StatusOK)
 		w.Write(bytRet)
-
 	}
 }

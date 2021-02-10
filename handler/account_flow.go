@@ -7,11 +7,11 @@ import (
 )
 
 type AccountSummaryFlow struct {
-	svc          accountSummaryService
+	svc          accountService
 	subAccountID string
 }
 
-func newGetAccountSummaryFlow(svc accountSummaryService, subAccountID string) *AccountSummaryFlow {
+func newGetAccountSummaryFlow(svc accountService, subAccountID string) *AccountSummaryFlow {
 	return &AccountSummaryFlow{
 		svc:          svc,
 		subAccountID: subAccountID,
@@ -20,7 +20,7 @@ func newGetAccountSummaryFlow(svc accountSummaryService, subAccountID string) *A
 
 func (f AccountSummaryFlow) doAccountSummaryRequest() goanda.AccountSummary {
 	endpoint := "/accounts/" + f.subAccountID + "/summary"
-	response := f.svc.OandaRequest(endpoint)
+	response := f.svc.Request(endpoint)
 	res := goanda.AccountSummary{}
 	json.Unmarshal(response, &res)
 	return res

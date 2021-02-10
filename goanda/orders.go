@@ -3,7 +3,6 @@ package goanda
 // Supporting OANDA docs - http://developer.oanda.com/rest-live-v20/order-ep/
 
 import (
-	"encoding/json"
 	"time"
 )
 
@@ -119,64 +118,64 @@ type CancelledOrder struct {
 	LastTransactionID     string   `json:"lastTransactionID"`
 }
 
-func (c *OandaConnection) CreateOrder(body OrderPayload) OrderResponse {
-	endpoint := "/accounts/" + c.accountID + "/orders"
-	jsonBody, err := json.Marshal(body)
-	checkErr(err)
-	response := c.Send(endpoint, jsonBody)
-	data := OrderResponse{}
-	unmarshalJson(response, &data)
-	return data
-}
+// func (c *OandaConnection) CreateOrder(body OrderPayload) OrderResponse {
+// 	endpoint := "/accounts/" + c.accountID + "/orders"
+// 	jsonBody, err := json.Marshal(body)
+// 	checkErr(err)
+// 	response := c.Send(endpoint, jsonBody)
+// 	data := OrderResponse{}
+// 	unmarshalJson(response, &data)
+// 	return data
+// }
 
-func (c *OandaConnection) GetOrders(instrument string) RetrievedOrders {
-	endpoint := "/accounts/" + c.accountID + "/orders"
+// func (c *OandaConnection) GetOrders(instrument string) RetrievedOrders {
+// 	endpoint := "/accounts/" + c.accountID + "/orders"
 
-	if instrument != "" {
-		endpoint = endpoint + "?instrument=" + instrument
-	}
+// 	if instrument != "" {
+// 		endpoint = endpoint + "?instrument=" + instrument
+// 	}
 
-	response := c.Request(endpoint)
-	data := RetrievedOrders{}
-	unmarshalJson(response, &data)
-	return data
-}
+// 	response := c.Request(endpoint)
+// 	data := RetrievedOrders{}
+// 	unmarshalJson(response, &data)
+// 	return data
+// }
 
-func (c *OandaConnection) GetPendingOrders() RetrievedOrders {
-	endpoint := "/accounts/" + c.accountID + "/pendingOrders"
+// func (c *OandaConnection) GetPendingOrders() RetrievedOrders {
+// 	endpoint := "/accounts/" + c.accountID + "/pendingOrders"
 
-	response := c.Request(endpoint)
-	data := RetrievedOrders{}
-	unmarshalJson(response, &data)
-	return data
+// 	response := c.Request(endpoint)
+// 	data := RetrievedOrders{}
+// 	unmarshalJson(response, &data)
+// 	return data
 
-}
+// }
 
-func (c *OandaConnection) GetOrder(orderSpecifier string) RetrievedOrder {
-	endpoint := "/accounts/" + c.accountID + "/orders/" + orderSpecifier
+// func (c *OandaConnection) GetOrder(orderSpecifier string) RetrievedOrder {
+// 	endpoint := "/accounts/" + c.accountID + "/orders/" + orderSpecifier
 
-	response := c.Request(endpoint)
-	data := RetrievedOrder{}
-	unmarshalJson(response, &data)
-	return data
+// 	response := c.Request(endpoint)
+// 	data := RetrievedOrder{}
+// 	unmarshalJson(response, &data)
+// 	return data
 
-}
+// }
 
-func (c *OandaConnection) UpdateOrder(orderSpecifier string, body OrderPayload) RetrievedOrder {
-	endpoint := "/accounts/" + c.accountID + "/orders/" + orderSpecifier
-	jsonBody, err := json.Marshal(body)
-	checkErr(err)
-	response := c.Update(endpoint, jsonBody)
-	data := RetrievedOrder{}
-	unmarshalJson(response, &data)
-	return data
-}
+// func (c *OandaConnection) UpdateOrder(orderSpecifier string, body OrderPayload) RetrievedOrder {
+// 	endpoint := "/accounts/" + c.accountID + "/orders/" + orderSpecifier
+// 	jsonBody, err := json.Marshal(body)
+// 	checkErr(err)
+// 	response := c.Update(endpoint, jsonBody)
+// 	data := RetrievedOrder{}
+// 	unmarshalJson(response, &data)
+// 	return data
+// }
 
-func (c *OandaConnection) CancelOrder(orderSpecifier string) CancelledOrder {
-	endpoint := "/accounts/" + c.accountID + "/orders/" + orderSpecifier + "/cancel"
-	response := c.Update(endpoint, nil)
-	data := CancelledOrder{}
-	unmarshalJson(response, &data)
-	return data
+// func (c *OandaConnection) CancelOrder(orderSpecifier string) CancelledOrder {
+// 	endpoint := "/accounts/" + c.accountID + "/orders/" + orderSpecifier + "/cancel"
+// 	response := c.Update(endpoint, nil)
+// 	data := CancelledOrder{}
+// 	unmarshalJson(response, &data)
+// 	return data
 
-}
+// }
