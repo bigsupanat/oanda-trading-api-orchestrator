@@ -44,6 +44,10 @@ func (s *server) startServer() {
 
 	s.router.Get("/get_account_summary", getAccountSummaryFn(s.svc))
 
+	s.router.Post("/createOrder", postOrderFn(s.svc))
+
+	s.router.Put("/cancelOrder", cancelOrderFn(s.svc))
+
 	s.srv = &http.Server{
 		Addr:    conf.ServicePort,
 		Handler: s.router,

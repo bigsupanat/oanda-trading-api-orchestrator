@@ -282,57 +282,57 @@ type OrderDetails struct {
 	LastTransactionID string `json:"lastTransactionID"`
 }
 
-func (c *OandaConnection) GetAccounts() AccountProperties {
-	endpoint := "/accounts"
+// func (c *OandaConnection) GetAccounts() AccountProperties {
+// 	endpoint := "/accounts"
 
-	response := c.Get(endpoint)
-	data := AccountProperties{}
-	unmarshalJson(response, &data)
-	return data
-}
+// 	response := c.Get(endpoint)
+// 	data := AccountProperties{}
+// 	unmarshalJson(response, &data)
+// 	return data
+// }
 
-func (c *OandaConnection) GetAccount(id string) AccountInfo {
-	endpoint := "/accounts/" + id
+// func (c *OandaConnection) GetAccount(id string) AccountInfo {
+// 	endpoint := "/accounts/" + id
 
-	response := c.Get(endpoint)
-	data := AccountInfo{}
-	unmarshalJson(response, &data)
-	return data
-}
+// 	response := c.Get(endpoint)
+// 	data := AccountInfo{}
+// 	unmarshalJson(response, &data)
+// 	return data
+// }
 
-func (c *OandaConnection) GetOrderDetails(instrument string, units string) OrderDetails {
-	endpoint := "/accounts/" + c.accountID + "/orderEntryData?disableFiltering=true&instrument=" + instrument + "&orderPositionFill=DEFAULT&units=" + units
-	orderDetails := c.Get(endpoint)
-	data := OrderDetails{}
-	unmarshalJson(orderDetails, &data)
+// func (c *OandaConnection) GetOrderDetails(instrument string, units string) OrderDetails {
+// 	endpoint := "/accounts/" + c.accountID + "/orderEntryData?disableFiltering=true&instrument=" + instrument + "&orderPositionFill=DEFAULT&units=" + units
+// 	orderDetails := c.Get(endpoint)
+// 	data := OrderDetails{}
+// 	unmarshalJson(orderDetails, &data)
 
-	return data
-}
+// 	return data
+// }
 
-func (c *OandaConnection) GetAccountSummary(acctNum string) AccountSummary {
-	//endpoint := "/accounts/" + c.accountID + "/summary"
-	endpoint := "/accounts/" + acctNum + "/summary"
+// func (c *OandaConnection) GetAccountSummary(acctNum string) AccountSummary {
+// 	//endpoint := "/accounts/" + c.accountID + "/summary"
+// 	endpoint := "/accounts/" + acctNum + "/summary"
 
-	response := c.Get(endpoint)
-	data := AccountSummary{}
-	unmarshalJson(response, &data)
-	return data
-}
+// 	response := c.Get(endpoint)
+// 	data := AccountSummary{}
+// 	unmarshalJson(response, &data)
+// 	return data
+// }
 
-func (c *OandaConnection) GetAccountInstruments(id string) AccountInstruments {
-	endpoint := "/accounts/" + id + "/instruments"
+// func (c *OandaConnection) GetAccountInstruments(id string) AccountInstruments {
+// 	endpoint := "/accounts/" + id + "/instruments"
 
-	response := c.Get(endpoint)
-	data := AccountInstruments{}
-	unmarshalJson(response, &data)
-	return data
-}
+// 	response := c.Get(endpoint)
+// 	data := AccountInstruments{}
+// 	unmarshalJson(response, &data)
+// 	return data
+// }
 
-func (c *OandaConnection) GetAccountChanges(id string, transactionId string) AccountChanges {
-	endpoint := "/accounts/" + id + "/changes?sinceTransactionID=" + transactionId
+// func (c *OandaConnection) GetAccountChanges(id string, transactionId string) AccountChanges {
+// 	endpoint := "/accounts/" + id + "/changes?sinceTransactionID=" + transactionId
 
-	response := c.Get(endpoint)
-	data := AccountChanges{}
-	unmarshalJson(response, &data)
-	return data
-}
+// 	response := c.Get(endpoint)
+// 	data := AccountChanges{}
+// 	unmarshalJson(response, &data)
+// 	return data
+// }

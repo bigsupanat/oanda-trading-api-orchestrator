@@ -17,7 +17,7 @@ type Headers struct {
 type Connection interface {
 	Get(endpoint string) []byte
 	Post(endpoint string, data []byte) []byte
-	// Update(endpoint string, data []byte) []byte
+	Put(endpoint string, data []byte) []byte
 }
 
 type OandaConnection struct {
@@ -102,15 +102,15 @@ func (c *OandaConnection) Post(endpoint string, data []byte) []byte {
 	return body
 }
 
-// func (c *OandaConnection) Update(endpoint string, data []byte) []byte {
-// 	client := http.Client{
-// 		Timeout: time.Second * 5,
-// 	}
+func (c *OandaConnection) Put(endpoint string, data []byte) []byte {
+	client := http.Client{
+		Timeout: time.Second * 5,
+	}
 
-// 	url := createUrl(c.hostname, endpoint)
+	url := createUrl(c.hostname, endpoint)
 
-// 	req, err := http.NewRequest(http.MethodPut, url, bytes.NewBuffer(data))
-// 	checkErr(err)
-// 	body := makeRequest(c, endpoint, client, req)
-// 	return body
-// }
+	req, err := http.NewRequest(http.MethodPut, url, bytes.NewBuffer(data))
+	checkErr(err)
+	body := makeRequest(c, endpoint, client, req)
+	return body
+}

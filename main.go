@@ -21,9 +21,9 @@ func main() {
 	svc := service.Service{
 		OandaGetFunc:  client.Get,
 		OandaPostFunc: client.Post,
+		OandaPutFunc:  client.Put,
 		//OandaRequestFunc: oanda.Request,
 		// OandaSendFunc:              oanda.Send,
-		// OandaUpdateFunc:            oanda.Update,
 		// OandaGetOrderDetailsFunc:   oanda.GetOrderDetails,
 		// OandaGetAccountSummaryFunc: oanda.GetAccountSummary,
 		// OandaCreateOrderFunc:       oanda.CreateOrder,
@@ -37,9 +37,6 @@ func main() {
 		serv.Stop()
 		log.Println("Stop server successfully")
 	}()
-
-	// accountSummary := oanda.GetAccountSummary(oandaAPI.SubAccountID)
-	// spew.Dump(accountSummary)
 
 	quit := make(chan os.Signal)
 	signal.Notify(quit, os.Interrupt)
